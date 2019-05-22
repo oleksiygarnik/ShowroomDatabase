@@ -1,0 +1,54 @@
+﻿@model DatabaseCar.Data_Access_Layer.Entities.Payroll
+@{
+    ViewBag.Title = "Delete";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+
+            <br />
+
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="/admin/index">Админпанель</a></li>
+                    <li><a href="/accountant/index">Управление товарами</a></li>
+                    <li class="active">Delete Payroll</li>
+                </ol>
+            </div>
+
+
+            <h4>Delete payroll @ViewBag.Id ?></h4>
+
+
+            <h2>Deleting payroll</h2>
+            <dl>
+                <dt>Name of Employee</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Employee)
+                </dd>
+
+                <dt>Date</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Date)
+                </dd>
+
+                <dt>Date of Period</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PeriodDate)
+                </dd>
+
+                <dt>Salary</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Salary)
+                </dd>
+            </dl>
+            <p>Are you really want to delete payroll?</p>
+
+            <form method="post">
+                <input type="submit" name="submit" value="Delete" />
+            </form>
+
+        </div>
+    </div>
+</section>

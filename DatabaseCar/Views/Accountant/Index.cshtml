@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@model DatabaseCar.Presentation_Access_Layer.ViewModels.AccountantViewModel
+
+@foreach (var item in Model.Tables)
+{
+    <a href="/accountant/index/@item.Name">@item.Name</a>
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+
+            <br />
+
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="/admin/index">Админпанель</a></li>
+                    <li class="active">Управление товарами</li>
+                </ol>
+            </div>
+            @if (ViewData["db"].ToString() == "Payrolls")
+            {
+                <a href="/accountant/createPayroll" class="btn btn-default back"><i class="fa fa-plus"></i> Add payroll </a>
+
+                <h4>List of Payrolls</h4>
+
+                <br />
+
+
+                <table class="table-bordered table-striped table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name of Employee</th>
+                        <th>Date</th>
+                        <th>Period Date</th>
+                        <th>Salary</th>
+                        <th>Status</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.Payrolls)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => @item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Employee)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PeriodDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Salary)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td><a href="/accountant/EditPayroll/@item.Id" title="Edit"><i class="fa fa-pencil-square-o">Edit</i></a></td>
+                            <td><a href="/accountant/deletePayroll/@item.Id" title="Delete"><i class="fa fa-times">Delete</i></a></td>
+                        </tr>
+                    }
+                </table>
+            }
+
+            @if (ViewData["db"].ToString() == "FinanceReports")
+            {
+                <a href="/accountant/createFinanceReport" class="btn btn-default back"><i class="fa fa-plus"></i> Add finance report </a>
+
+                <h4>List of Finance Reports</h4>
+
+                <br />
+
+
+                <table class="table-bordered table-striped table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name of Employee</th>
+                        <th>Date</th>
+                        <th>Budget Changed</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.FinanceReports)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => @item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Employee)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BudgetChanged)
+                            </td>
+
+                            <td><a href="/accountant/EditFinanceReport/@item.Id" title="Edit"><i class="fa fa-pencil-square-o">Edit</i></a></td>
+                            <td><a href="/accountant/deleteFinanceReport/@item.Id" title="Delete"><i class="fa fa-times">Delete</i></a></td>
+                        </tr>
+                    }
+                </table>
+            }
+
+
+
+        </div>
+    </div>
+</section>
+
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h6>Welcome</h6>
+}
+else
+{
+    <a href="/Auth/Logout">Exit</a>
+}

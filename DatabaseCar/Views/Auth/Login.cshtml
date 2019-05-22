@@ -1,0 +1,13 @@
+﻿@model DatabaseCar.Presentation_Access_Layer.ViewModels.LoginViewModel
+
+<form id="login" method="post" action="~/Auth/Login">
+    <h1>Sign In</h1>
+    <fieldset id="inputs">
+        <input id="username" placeholder="Email" name="Email" autofocus="" required="" type="text">
+        <input id="password" placeholder="Password" name="Password" required="" type="password">
+    </fieldset>
+    <fieldset id="actions">
+        <input id="submit" value="Sign In" type="submit">
+        <a href="">Forget password?</a><a asp-action="Register" asp-controller="Account">Sign Up</a>
+    </fieldset>
+</form>
