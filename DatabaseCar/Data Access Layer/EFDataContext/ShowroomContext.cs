@@ -33,7 +33,8 @@ namespace DatabaseCar.Data_Access_Layer.EFDataContext
 
         public ShowroomContext(DbContextOptions<ShowroomContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureDeleted();
+            //Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

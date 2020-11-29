@@ -1,0 +1,427 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@model DatabaseCar.Presentation_Access_Layer.ViewModels.DirectorViewModel
+
+@if (User.Identity.IsAuthenticated)
+{
+    <a href="/Auth/Logout" class="btn btn-default back">Exit</a><br>
+}
+
+
+<section>
+    <div class="container">
+        <div class="row">
+
+            <br />
+
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="/admin/index">Админпанель</a></li>
+                    <li class="active">Управление автосалоном</li>
+                </ol>
+            </div>
+            <h1>Available tables: </h1>
+            <br>
+            @foreach (var item in Model.Tables)
+            {
+                <a href="/director/index/@item.Name" class="btn btn-default back">@item.Name</a>
+            }
+            @if (ViewData["db"].ToString() == "Payrolls")
+            {
+                @*<a href="/accountant/createPayroll" class="btn btn-default back"><i class="fa fa-plus"></i> Add payroll </a>*@
+
+                <h4>List of Payrolls</h4>
+
+                <br />
+
+
+                <table class="table-bordered table-striped table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name of Employee</th>
+                        <th>Date</th>
+                        <th>Period Date</th>
+                        <th>Salary</th>
+                        <th>Status</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.Payrolls)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => @item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Employee.Surname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PeriodDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Salary)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            @if (item.Status != DatabaseCar.Data_Access_Layer.Entities.Enums.Status.Accept && item.Status != DatabaseCar.Data_Access_Layer.Entities.Enums.Status.Reject)
+                            {
+                                <td><a href="/director/acceptPayroll/@item.Id" title="Edit"><i class="fa fa-pencil-square-o">Accept</i></a></td>
+                                <td><a href="/director/rejectPayroll/@item.Id" title="Delete"><i class="fa fa-times">Reject</i></a></td>
+                            }
+                        </tr>
+                    }
+                </table>
+            }
+
+            @if (ViewData["db"].ToString() == "Commands")
+            {
+                <a href="/director/createCommand" class="btn btn-default back"><i class="fa fa-plus"></i> Add command </a>
+
+                <h4>List of Commands</h4>
+
+                <br />
+
+
+                <table class="table-bordered table-striped table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name of Employee</th>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.Commands)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => @item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Employee.Surname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+
+                            <td><a href="/director/EditCommand/@item.Id" title="Edit"><i class="fa fa-pencil-square-o">Edit</i></a></td>
+                            <td><a href="/director/deleteCommand/@item.Id" title="Delete"><i class="fa fa-times">Delete</i></a></td>
+                        </tr>
+                    }
+                </table>
+            }
+
+
+            @if (ViewData["db"].ToString() == "SellDocuments")
+            {
+                @*<a href="/salesmanager/createSellDocument" class="btn btn-default back"><i class="fa fa-plus"></i> Add sell document </a>*@
+
+                <h4>List of Sell documents</h4>
+
+                <br />
+
+
+                <table class="table-bordered table-striped table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Car</th>
+                        <th>Client</th>
+                        <th>Employee</th>
+                        <th>Price</th>
+                        <th>Payment method</th>
+                        <th>Sale Date</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.SellDocuments)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => @item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Car)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Client.Surname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Employee.Surname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Price)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PaymentMethod.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SaleDate)
+                            </td>
+
+                            <td><a href="/director/acceptSellDocument/@item.Id" title="Edit"><i class="fa fa-pencil-square-o">Accept</i></a></td>
+                            <td><a href="/director/rejectSellDocument/@item.Id" title="Delete"><i class="fa fa-times">Reject</i></a></td>
+                        </tr>
+                    }
+                </table>
+            }
+
+            @if (ViewData["db"].ToString() == "SickLeaves")
+            {
+                @*<a href="/salesmanager/createSellDocument" class="btn btn-default back"><i class="fa fa-plus"></i> Add sell document </a>*@
+
+                <h4>List of Sick Leaves</h4>
+
+                <br />
+
+
+                <table class="table-bordered table-striped table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Employee</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Status</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.SickLeaves)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => @item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Employee.Surname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StartDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EndDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            @if (item.Status != DatabaseCar.Data_Access_Layer.Entities.Enums.Status.Accept && item.Status != DatabaseCar.Data_Access_Layer.Entities.Enums.Status.Reject)
+                            {
+                                <td><a href="/director/acceptSickLeave/@item.Id" title="Edit"><i class="fa fa-pencil-square-o">Accept</i></a></td>
+                                <td><a href="/director/rejectSickLeave/@item.Id" title="Delete"><i class="fa fa-times">Reject</i></a></td>
+                            }
+                        </tr>
+                    }
+                </table>
+            }
+
+
+            @if (ViewData["db"].ToString() == "TripOrders")
+            {
+                @*<a href="/salesmanager/createSellDocument" class="btn btn-default back"><i class="fa fa-plus"></i> Add trip order </a>*@
+
+                <h4>List of Trip Orders</h4>
+
+                <br />
+
+
+                <table class="table-bordered table-striped table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Employee</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Status</th>
+                        <th>Location</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.TripOrders)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => @item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Employee.Surname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StartDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EndDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Location)
+                            </td>
+                            @if (item.Status != DatabaseCar.Data_Access_Layer.Entities.Enums.Status.Accept && item.Status != DatabaseCar.Data_Access_Layer.Entities.Enums.Status.Reject)
+                            {
+                                <td><a href="/director/acceptTripOrder/@item.Id" title="Edit"><i class="fa fa-pencil-square-o">Accept</i></a></td>
+                                <td><a href="/director/rejectTripOrder/@item.Id" title="Delete"><i class="fa fa-times">Reject</i></a></td>
+                            }
+                        </tr>
+                    }
+                </table>
+            }
+
+
+
+            @if (ViewData["db"].ToString() == "VacationDocuments")
+            {
+                @*<a href="/salesmanager/createSellDocument" class="btn btn-default back"><i class="fa fa-plus"></i> Add sell document </a>*@
+
+                <h4>List of Vacation Documents</h4>
+
+                <br />
+
+
+                <table class="table-bordered table-striped table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Employee</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Status</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.VacationDocuments)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => @item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Employee.Surname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StartDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EndDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            @if (item.Status != DatabaseCar.Data_Access_Layer.Entities.Enums.Status.Accept && item.Status != DatabaseCar.Data_Access_Layer.Entities.Enums.Status.Reject)
+                            {
+                                <td><a href="/director/acceptVacationDocument/@item.Id" title="Edit"><i class="fa fa-pencil-square-o">Accept</i></a></td>
+                                <td><a href="/director/rejectVacationDocument/@item.Id" title="Delete"><i class="fa fa-times">Reject</i></a></td>
+                            }
+                        </tr>
+                    }
+                </table>
+            }
+
+
+            @if (ViewData["db"].ToString() == "PurchaseContracts")
+            {
+                @*<a href="/salesmanager/createSellDocument" class="btn btn-default back"><i class="fa fa-plus"></i> Add sell document </a>*@
+
+                <h4>List of Purchase Contracts</h4>
+
+                <br />
+
+
+                <table class="table-bordered table-striped table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Employee</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Status</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.PurchaseContracts)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => @item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SupplierName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CarPurchaseContracts)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            @if (item.Status != DatabaseCar.Data_Access_Layer.Entities.Enums.Status.Accept && item.Status != DatabaseCar.Data_Access_Layer.Entities.Enums.Status.Reject)
+                            {
+                                <td><a href="/director/acceptPurchaseContract/@item.Id" title="Edit"><i class="fa fa-pencil-square-o">Accept</i></a></td>
+                                <td><a href="/director/rejectPurchaseContract/@item.Id" title="Delete"><i class="fa fa-times">Reject</i></a></td>
+                            }
+                        </tr>
+                    }
+                </table>
+            }
+
+
+            @if (ViewData["db"].ToString() == "EmploymentContracts")
+            {
+                @*<a href="/salesmanager/createSellDocument" class="btn btn-default back"><i class="fa fa-plus"></i> Add sell document </a>*@
+
+                <h4>List of Employment contracts</h4>
+
+                <br />
+
+
+                <table class="table-bordered table-striped table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Employee</th>
+                        <th>Position</th>
+                        <th>Salary</th>
+                        <th>Employee Date</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.EmploymentContracts)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => @item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Employees)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Position)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Salary)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmploymentDate)
+                            </td>
+                            @*@if (item.Status == DatabaseCar.Data_Access_Layer.Entities.Enums.Status.Accept || item.Status == DatabaseCar.Data_Access_Layer.Entities.Enums.Status.Reject)
+                        {
+                            <td><a href="/director/acceptEmploymentContract/@item.Id" title="Edit"><i class="fa fa-pencil-square-o">Accept</i></a></td>
+                            <td><a href="/director/rejectEmploymentContract/@item.Id" title="Delete"><i class="fa fa-times">Reject</i></a></td>
+                        }*@
+                        </tr>
+                    }
+                </table>
+            }
+
+        </div>
+    </div>
+</section>
+
+
+

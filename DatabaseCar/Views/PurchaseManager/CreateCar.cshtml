@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+@using DatabaseCar.Data_Access_Layer.Entities.Enums;
+@model DatabaseCar.Data_Access_Layer.Entities.Car
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+
+            <br />
+
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="/admin/index">Админпанель</a></li>
+                    <li><a href="/purchase/index">Управление контрактами</a></li>
+                    <li class="active">Add car</li>
+                </ol>
+            </div>
+
+            <h4>Add new purchase contract</h4>
+
+            <br />
+
+            @using (Html.BeginForm())
+            {
+                @Html.DisplayNameFor(model => model.Brand)
+                <br />
+                @Html.DropDownListFor(model => model.BrandId, new SelectList(ViewBag.Brands, "Id", "Name"))
+                <br /><br />
+                @Html.DisplayNameFor(model => model.Model)
+                <br />
+                @Html.DropDownListFor(model => model.ModelId, new SelectList(ViewBag.Models, "Id", "Name"))
+                <br /><br />
+                @Html.DisplayNameFor(model => model.Color)
+                <br />
+                @Html.DropDownListFor(model => model.ColorId, new SelectList(ViewBag.Colors, "Id", "Name"))
+                <br /><br />
+                @Html.LabelFor(model => model.Price, "Price")
+                <br />
+                @Html.EditorFor(model => model.Price)
+                <br /><br />
+                @Html.DisplayNameFor(model => model.Status)
+                <br />
+                @Html.DropDownListFor(model => model.Status, new SelectList(new List<StatusCar> { StatusCar.Missing, StatusCar.Available }, "Name"))
+                <br /><br />
+                @Html.LabelFor(model => model.DeliveryDate, "Delivery date")
+                <br />
+                @Html.EditorFor(model => model.DeliveryDate)
+                <br /><br />
+                <br />
+                <input type="submit" class="btn btn-default" value="Add" />
+            }
+
+
+        </div>
+    </div>
+</section>

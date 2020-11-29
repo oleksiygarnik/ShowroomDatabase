@@ -1,4 +1,4 @@
-﻿@model DatabaseCar.Data_Access_Layer.Entities.Payroll
+﻿@model DatabaseCar.Data_Access_Layer.Entities.Command
 @{
     ViewBag.Title = "Edit";
 }
@@ -13,18 +13,18 @@
                 <ol class="breadcrumb">
                     <li><a href="/admin/index">Админпанель</a></li>
                     <li><a href="/accountant/index">Управление товарами</a></li>
-                    <li class="active">Edit payroll </li>
+                    <li class="active">Edit command</li>
                 </ol>
             </div>
 
 
-            <h4>Редактировать товар @Model.Id ?</h4>
+            <h4>Are you want edit command @Model.Id ?</h4>
 
             <br />
-            <h2>Payroll № @Model.Id</h2>
+            <h2>Finance report № @Model.Id</h2>
             <div class="col-lg-4">
                 <div class="login-form">
-                    <form action="/accountant/editPayroll" method="post" enctype="multipart/form-data">
+                    <form action="/director/editCommand" method="post" enctype="multipart/form-data">
                         @Html.HiddenFor(m => m.Id)
                         <p>
                             @Html.LabelFor(m => m.EmployeeId, "Employee")
@@ -40,15 +40,9 @@
                         </p>
 
                         <p>
-                            @Html.LabelFor(m => m.PeriodDate, "Date of Period")
+                            @Html.LabelFor(m => m.Description, "Description")
                             <br />
-                            @Html.EditorFor(m => m.PeriodDate)
-                        </p>
-
-                        <p>
-                            @Html.LabelFor(m => m.Salary, "Salary")
-                            <br />
-                            @Html.EditorFor(m => m.Salary)
+                            @Html.EditorFor(m => m.Description)
                         </p>
 
                         <p><input type="submit" value="Отправить" /></p>

@@ -5,10 +5,11 @@
 
 @model DatabaseCar.Presentation_Access_Layer.ViewModels.AccountantViewModel
 
-@foreach (var item in Model.Tables)
+@if (User.Identity.IsAuthenticated)
 {
-    <a href="/accountant/index/@item.Name">@item.Name</a>
+    <a href="/Auth/Logout" class="btn btn-default back">Exit</a><br />
 }
+
 
 <section>
     <div class="container">
@@ -19,9 +20,15 @@
             <div class="breadcrumbs">
                 <ol class="breadcrumb">
                     <li><a href="/admin/index">Админпанель</a></li>
-                    <li class="active">Управление товарами</li>
+                    <li class="active">Управление бухгалтерией</li>
                 </ol>
             </div>
+            <h1>Available tables: </h1>
+            <br>
+            @foreach (var item in Model.Tables)
+            {
+                <a href="/accountant/index/@item.Name" class="btn btn-default back">@item.Name</a><br>
+            }
             @if (ViewData["db"].ToString() == "Payrolls")
             {
                 <a href="/accountant/createPayroll" class="btn btn-default back"><i class="fa fa-plus"></i> Add payroll </a>
@@ -119,11 +126,3 @@
 
 
 
-@if (User.Identity.IsAuthenticated)
-{
-    <h6>Welcome</h6>
-}
-else
-{
-    <a href="/Auth/Logout">Exit</a>
-}

@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@model DatabaseCar.Presentation_Access_Layer.ViewModels.SysAdminViewModel
+
+@if (User.Identity.IsAuthenticated)
+{
+    <a href="/Auth/Logout" class="btn btn-default back">Exit</a><br />
+}
+
+<h1>Available tables: </h1>
+<br>
+
+@foreach (var item in Model.Tables)
+{
+    <a href="/sysadmin/index/@item.Name" class="btn btn-default back">@item.Name</a>
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+
+            <br />
+
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="/admin/index">Админпанель</a></li>
+                    <li class="active">Управление IT-система</li>
+                </ol>
+            </div>
+            <h1>Available tables: </h1>
+            <br>
+
+            @foreach (var item in Model.Tables)
+            {
+                <a href="/sysadmin/index/@item.Name" class="btn btn-default back">@item.Name</a>
+            }
+            @if (ViewData["db"].ToString() == "ITWorkApplications")
+            {
+                <a href="/sysadmin/createITApplication" class="btn btn-default back"><i class="fa fa-plus"></i> Add IT Work </a>
+
+                <h4>List of IT works</h4>
+
+                <br />
+
+
+                <table class="table-bordered table-striped table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name of Employee</th>
+                        <th>Date</th>
+                        <th>Problem</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.ITWorkApplications)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => @item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Employee.Surname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Problem)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            @if (item.Status == DatabaseCar.Data_Access_Layer.Entities.Enums.StatusIT.InProcess)
+                            {
+                                <td><a href="/sysadmin/EditITApplication/@item.Id" title="Edit"><i class="fa fa-pencil-square-o">Check done</i></a></td>
+                            }
+                            <td><a href="/sysadmin/deleteITApplication/@item.Id" title="Delete"><i class="fa fa-times">Delete</i></a></td>
+                        </tr>
+                    }
+                </table>
+            }
+
+
+
+
+        </div>
+    </div>
+</section>
+
+
+

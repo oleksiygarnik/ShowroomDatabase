@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DatabaseCar.Data_Access_Layer.Entities.Enums;
 
 namespace DatabaseCar.Data_Access_Layer.Entities
 {

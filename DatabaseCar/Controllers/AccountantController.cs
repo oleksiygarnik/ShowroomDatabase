@@ -37,12 +37,15 @@ namespace DatabaseCar.Controllers
             vm.FinanceReports = db.FinanceReports.Include(f => f.Employee).ToList();
             vm.Tables = db.Tables.Where(t => t.Position.Name == "Accountant").ToList();
 
+            ViewBag.Employees = db.Employees;
+
             return View(vm);
         }
 
         [HttpGet]
         public ActionResult CreatePayroll()
         {
+            ViewBag.Employees = db.Employees.ToList();
             return View();
         }
 
@@ -59,7 +62,7 @@ namespace DatabaseCar.Controllers
             db.Entry(payroll).State = EntityState.Added;
             db.SaveChanges();
             ViewBag.right = true;
-            return View();
+            return Redirect("/accountant/index/payrolls");
         }
 
         [HttpPost]
@@ -124,7 +127,7 @@ namespace DatabaseCar.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditFinancReport(FinanceReport financeReport)
+        public ActionResult EditFinanceReport(FinanceReport financeReport)
         {
             db.Entry(financeReport).State = EntityState.Modified;
             db.SaveChanges();

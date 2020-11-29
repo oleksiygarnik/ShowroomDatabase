@@ -1,0 +1,72 @@
+﻿
+
+@model DatabaseCar.Data_Access_Layer.Entities.Client
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+
+            <br />
+
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="/admin/index">Админпанель</a></li>
+                    <li><a href="/accountant/index">Управление товарами</a></li>
+                    <li class="active">Add client</li>
+                </ol>
+            </div>
+
+            <h4>Add new client</h4>
+
+            <br />
+
+            @using (Html.BeginForm())
+            {
+                @Html.LabelFor(model => model.Name, "Name")
+                <br />
+                @Html.EditorFor(model => model.Name)
+                <br /><br />
+                @Html.LabelFor(model => model.Surname, "Surname")
+                <br />
+                @Html.EditorFor(model => model.Surname)
+                <br /><br />
+                @Html.LabelFor(model => model.Patronymic, "Patronymic")
+                <br />
+                @Html.EditorFor(model => model.Patronymic)
+                <br /><br />
+
+                @Html.LabelFor(model => model.Passport, "Passport")
+                <br />
+                @Html.EditorFor(model => model.Passport)
+                <br /><br />
+
+                @Html.LabelFor(model => model.Age, "Age")
+                <br />
+                @Html.EditorFor(model => model.Age)
+                <br /><br />
+
+                @Html.LabelFor(model => model.BirthdayDate, "Birthday Date")
+                <br />
+                @Html.EditorFor(model => model.BirthdayDate)
+                <br /><br />
+                @Html.LabelFor(model => model.ContactInfo.Address, "Address")
+                <br />
+                @Html.EditorFor(model => model.ContactInfo.Address)
+                <br /><br />
+
+                @Html.LabelFor(model => model.ContactInfo.Phone, "Phone")
+                <br />
+                @Html.EditorFor(model => model.ContactInfo.Phone)
+                <br /><br />
+
+                <input type="submit" class="btn btn-default" value="Add" />
+            }
+
+
+        </div>
+    </div>
+</section>

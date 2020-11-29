@@ -1,0 +1,44 @@
+﻿@model DatabaseCar.Data_Access_Layer.Entities.ITWorkApplication
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+
+            <br />
+
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="/admin/index">Админпанель</a></li>
+                    <li><a href="/accountant/index">Управление товарами</a></li>
+                    <li class="active">Add finance report</li>
+                </ol>
+            </div>
+
+            <h4>Add new finance report</h4>
+
+            <br />
+
+            @using (Html.BeginForm())
+            {
+            @Html.LabelFor(model => model.EmployeeId, "Employee")
+            <br />
+            @Html.EditorFor(model => model.EmployeeId)
+            <br /><br />
+            @Html.LabelFor(model => model.Date, "Date")
+            <br />
+            @Html.EditorFor(model => model.Date)
+            <br /><br />
+            @Html.LabelFor(model => model.Problem, "Problem")
+            <br /><br />
+            @Html.EditorFor(model => model.Problem)
+            <input type="submit" class="btn btn-default" value="Add" />
+            }
+
+
+        </div>
+    </div>
+</section>

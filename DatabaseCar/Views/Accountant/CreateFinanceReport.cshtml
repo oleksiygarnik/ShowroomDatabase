@@ -1,11 +1,6 @@
 ﻿
-@{
-    ViewData["Title"] = "Create";
-}
 
-<h2>Create</h2>
-
-@model DatabaseCar.Data_Access_Layer.Entities.Payroll
+@model DatabaseCar.Data_Access_Layer.Entities.FinanceReport
 
 @{
     ViewBag.Title = "Create";
@@ -21,17 +16,17 @@
                 <ol class="breadcrumb">
                     <li><a href="/admin/index">Админпанель</a></li>
                     <li><a href="/accountant/index">Управление товарами</a></li>
-                    <li class="active">Add payroll</li>
+                    <li class="active">Add finance report</li>
                 </ol>
             </div>
 
-            <h4>Add new payroll</h4>
+            <h4>Add new finance report</h4>
 
             <br />
 
             @using (Html.BeginForm())
             {
-                @Html.LabelFor(model => model.Employee.Name, "Employee")
+                @Html.LabelFor(model => model.EmployeeId, "Employee")
                 <br />
                 @Html.EditorFor(model => model.EmployeeId)
                 <br /><br />
@@ -39,14 +34,9 @@
                 <br />
                 @Html.EditorFor(model => model.Date)
                 <br /><br />
-                @Html.LabelFor(model => model.PeriodDate, "Date of Period")
-                <br />
-                @Html.EditorFor(model => model.PeriodDate)
+                @Html.LabelFor(model => model.BudgetChanged, "Budget changed")
                 <br /><br />
-                @Html.LabelFor(model => model.Salary, "Salary")
-                <br />
-                @Html.EditorFor(model => model.Salary)
-                <br /><br />
+                @Html.EditorFor(model => model.BudgetChanged)
                 <input type="submit" class="btn btn-default" value="Add" />
             }
 

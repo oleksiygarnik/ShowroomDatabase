@@ -1,0 +1,126 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+@model DatabaseCar.Presentation_Access_Layer.ViewModels.PurchaseViewModel
+
+<section>
+    <div class="container">
+        <div class="row">
+
+
+
+            @if (User.Identity.IsAuthenticated)
+            {
+  
+                <a href="/Auth/Logout"  class="btn btn-default back">Exit</a>
+            }
+
+            <br>
+
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="/admin/index">Админпанель</a></li>
+                    <li class="active">Управление покупками</li>
+                </ol>
+            </div>
+
+            @foreach (var item in Model.Tables)
+            {
+                <a href="/purchasemanager/index/@item.Name" class="btn btn-default back"><i class="fa fa-plus"></i>@item.Name</a>
+            }
+
+            @if (ViewData["db"].ToString() == "PurchaseContracts")
+            {
+                <a href="/purchasemanager/createPurchaseContract" class="btn btn-default back"><i class="fa fa-plus"></i>Add purchase contract</a>
+
+                <h4>List of Purchase contracts</h4>
+
+                <br>
+
+
+                <table class="table-bordered table-striped table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Supplier name</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.PurchaseContracts)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => @item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SupplierName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td><a href="/purchasemanager/editPurchaseContract/@item.Id" title="Edit"><i class="fa fa-pencil-square-o">Edit</i></a></td>
+                            <td><a href="/purchasemanager/deletePurchaseContract/@item.Id" title="Delete"><i class="fa fa-times">Delete</i></a></td>
+                        </tr>
+                    }
+                </table>
+            }
+
+            @if (ViewData["db"].ToString() == "Cars")
+            {
+                <a href="/purchasemanager/createCar" class="btn btn-default back"><i class="fa fa-plus"></i> Add new car</a>
+
+                <h4>List of cars</h4>
+
+                <br>
+
+                <table class="table-bordered table-striped table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Color</th>
+                        <th>Model</th>
+                        <th>Brand</th>
+                        <th>Delivery date</th>
+                        <th>Sale Date</th>
+                        <th>Price</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.Cars)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => @item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Color)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Model)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Brand)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DeliveryDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SaleDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Price)
+                            </td>
+
+                            <td><a href="/purchasemanager/editCar/@item.Id" title="Edit"><i class="fa fa-pencil-square-o">Edit</i></a></td>
+                            <td><a href="/purchasemanager/deleteCar/@item.Id" title="Delete"><i class="fa fa-times">Delete</i></a></td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+    </div>
+</section>

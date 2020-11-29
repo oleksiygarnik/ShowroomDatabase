@@ -5,8 +5,8 @@
 
 <h2>Create</h2>
 
-@model DatabaseCar.Data_Access_Layer.Entities.Payroll
-
+@model DatabaseCar.Data_Access_Layer.Entities.PurchaseContract
+@using DatabaseCar.Data_Access_Layer.Entities.Enums;
 @{
     ViewBag.Title = "Create";
 }
@@ -20,33 +20,30 @@
             <div class="breadcrumbs">
                 <ol class="breadcrumb">
                     <li><a href="/admin/index">Админпанель</a></li>
-                    <li><a href="/accountant/index">Управление товарами</a></li>
-                    <li class="active">Add payroll</li>
+                    <li><a href="/purchase/index">Управление контрактами</a></li>
+                    <li class="active">Add purchase contract</li>
                 </ol>
             </div>
 
-            <h4>Add new payroll</h4>
+            <h4>Add new purchase contract</h4>
 
             <br />
 
             @using (Html.BeginForm())
             {
-                @Html.LabelFor(model => model.Employee.Name, "Employee")
+                @Html.LabelFor(model => model.SupplierName, "Supplier name")
                 <br />
-                @Html.EditorFor(model => model.EmployeeId)
+                @Html.EditorFor(model => model.SupplierName)
                 <br /><br />
                 @Html.LabelFor(model => model.Date, "Date")
                 <br />
                 @Html.EditorFor(model => model.Date)
                 <br /><br />
-                @Html.LabelFor(model => model.PeriodDate, "Date of Period")
+                @Html.DisplayNameFor(model => model.Status)
                 <br />
-                @Html.EditorFor(model => model.PeriodDate)
+                @Html.DropDownListFor(model => model.Status, new SelectList(new List<Status> { Status.Waiting }, "Name"))
                 <br /><br />
-                @Html.LabelFor(model => model.Salary, "Salary")
                 <br />
-                @Html.EditorFor(model => model.Salary)
-                <br /><br />
                 <input type="submit" class="btn btn-default" value="Add" />
             }
 

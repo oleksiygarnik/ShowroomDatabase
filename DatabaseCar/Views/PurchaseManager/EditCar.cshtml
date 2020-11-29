@@ -1,0 +1,84 @@
+﻿@model DatabaseCar.Data_Access_Layer.Entities.Car
+@using DatabaseCar.Data_Access_Layer.Entities.Enums
+@{
+    ViewBag.Title = "Edit";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+
+            <br />
+
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="/admin/index">Админпанель</a></li>
+                    <li><a href="/accountant/index">Управление товарами</a></li>
+                    <li class="active">Edit payroll </li>
+                </ol>
+            </div>
+
+
+            <h4>Редактировать товар @Model.Id ?></h4>
+
+            <br />
+            <h2>Payroll № @Model.Id</h2>
+            <div class="col-lg-4">
+                <div class="login-form">
+                    <form action="/purchasemanager/editCar" method="post" enctype="multipart/form-data">
+                        @Html.HiddenFor(m => m.Id)
+                        <p>
+                            @Html.DisplayNameFor(model => model.Brand)
+                            <br />
+                            @Html.DropDownListFor(model => model.BrandId, new SelectList(ViewBag.Brands, "Id", "Name"))
+                        </p>
+
+                        <p>
+                            @Html.DisplayNameFor(model => model.Model)
+                            <br />
+                            @Html.DropDownListFor(model => model.ModelId, new SelectList(ViewBag.Models, "Id", "Name"))
+
+                        </p>
+
+                        <p>
+                            @Html.DisplayNameFor(model => model.Color)
+                            <br />
+                            @Html.DropDownListFor(model => model.ColorId, new SelectList(ViewBag.Colors, "Id", "Name"))
+                        </p>
+
+                        <p>
+                            @Html.LabelFor(m => m.Price, "Price")
+                            <br />
+                            @Html.EditorFor(m => m.Price)
+                        </p>
+
+                        <p>
+                            @Html.LabelFor(m => m.DeliveryDate, "Delivery date")
+                            <br />
+                            @Html.EditorFor(m => m.DeliveryDate)
+                        </p>
+
+                        <p>
+                            @Html.LabelFor(m => m.SaleDate, "Sale date")
+                            <br />
+                            @Html.EditorFor(m => m.SaleDate)
+                        </p>
+
+                        <p>
+                            @Html.DisplayNameFor(model => model.Status)
+                            <br />
+                            @Html.DropDownListFor(model => model.Status, new SelectList(new List<StatusCar> { StatusCar.Missing, StatusCar.Available }, "Name"))
+                        </p>
+
+                        <p><input type="submit" value="Отправить" /></p>
+
+
+                        <br /><br />
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

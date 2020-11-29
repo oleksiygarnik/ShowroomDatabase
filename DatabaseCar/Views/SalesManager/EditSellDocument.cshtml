@@ -1,4 +1,4 @@
-﻿@model DatabaseCar.Data_Access_Layer.Entities.Payroll
+﻿@model DatabaseCar.Data_Access_Layer.Entities.SellDocument
 @{
     ViewBag.Title = "Edit";
 }
@@ -13,19 +13,31 @@
                 <ol class="breadcrumb">
                     <li><a href="/admin/index">Админпанель</a></li>
                     <li><a href="/accountant/index">Управление товарами</a></li>
-                    <li class="active">Edit payroll </li>
+                    <li class="active">Edit sell document </li>
                 </ol>
             </div>
 
 
-            <h4>Редактировать товар @Model.Id ?</h4>
+            <h4>Are you want edit sell document @Model.Id ?</h4>
 
             <br />
-            <h2>Payroll № @Model.Id</h2>
+            <h2>Sell document № @Model.Id</h2>
             <div class="col-lg-4">
                 <div class="login-form">
-                    <form action="/accountant/editPayroll" method="post" enctype="multipart/form-data">
+                    <form action="/salesmanager/editSellDocument" method="post" enctype="multipart/form-data">
                         @Html.HiddenFor(m => m.Id)
+                        <p>
+                            @Html.LabelFor(m => m.CarId, "Car")
+                            <br />
+                            @Html.EditorFor(m => m.CarId)
+                        </p>
+
+                        <p>
+                            @Html.LabelFor(m => m.ClientId, "Client")
+                            <br />
+                            @Html.EditorFor(m => m.ClientId)
+                        </p>
+
                         <p>
                             @Html.LabelFor(m => m.EmployeeId, "Employee")
                             <br />
@@ -33,23 +45,25 @@
                         </p>
 
                         <p>
-                            @Html.LabelFor(m => m.Date, "Date")
+                            @Html.LabelFor(m => m.PaymentMethodId, "Payment method")
                             <br />
-                            @Html.EditorFor(m => m.Date)
-
+                            @Html.EditorFor(m => m.PaymentMethodId)
                         </p>
 
                         <p>
-                            @Html.LabelFor(m => m.PeriodDate, "Date of Period")
+                            @Html.LabelFor(m => m.Price, "Price")
                             <br />
-                            @Html.EditorFor(m => m.PeriodDate)
+                            @Html.EditorFor(m => m.Price)
+
                         </p>
 
+
                         <p>
-                            @Html.LabelFor(m => m.Salary, "Salary")
+                            @Html.LabelFor(m => m.SaleDate, "Sale Date")
                             <br />
-                            @Html.EditorFor(m => m.Salary)
+                            @Html.EditorFor(m => m.SaleDate)
                         </p>
+
 
                         <p><input type="submit" value="Отправить" /></p>
 

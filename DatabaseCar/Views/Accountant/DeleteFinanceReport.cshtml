@@ -1,0 +1,54 @@
+﻿@model DatabaseCar.Data_Access_Layer.Entities.FinanceReport
+@{
+    ViewBag.Title = "Delete";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+
+            <br />
+
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="/admin/index">Админпанель</a></li>
+                    <li><a href="/accountant/index">Управление товарами</a></li>
+                    <li class="active">Delete Finance Report</li>
+                </ol>
+            </div>
+
+
+            <h4>Delete finance report @ViewBag.Id ?></h4>
+
+
+            <h2>Deleting finance report</h2>
+            <dl>
+                <dt>Name of Employee</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Id)
+                </dd>
+
+                <dt>Date</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Employee)
+                </dd>
+
+                <dt>Date of Period</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.BudgetChanged)
+                </dd>
+
+                <dt>Salary</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Date)
+                </dd>
+            </dl>
+            <p>Are you really want to delete finance report?</p>
+
+            <form method="post">
+                <input type="submit" name="submit" value="Delete" />
+            </form>
+
+        </div>
+    </div>
+</section>
